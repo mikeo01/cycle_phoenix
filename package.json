@@ -4,7 +4,7 @@
   "description": "Cycle.js driver around the Phoenix WS library; connect to Elixir Phoenix channels from Cycle.js",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -r ts-node/register test/**.ts",
     "build": "tsc"
   },
   "keywords": [
@@ -14,7 +14,12 @@
   "author": "Michael Long",
   "license": "ISC",
   "devDependencies": {
+    "@types/assert": "^1.4.1",
+    "@types/mocha": "^5.2.5",
     "@types/phoenix": "0.0.4",
+    "assert": "^1.4.1",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   },
   "dependencies": {
