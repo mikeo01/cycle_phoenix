@@ -84,7 +84,7 @@ export class MakePhoenixWSSource implements PhoenixWSSource {
             next: () => {
                 // Retrieve interested channel
                 const channel = this._socketsupervisor.getChannel(this._chanId);
-console.log(`listening on ${event.eventName}`)
+
                 // Add listener
                 channel.on(event.eventName, (message: any) => listener.next(message));
             },
