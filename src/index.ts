@@ -123,7 +123,7 @@ function compose$(envelope: Compose, socketsupervisor: SocketSupervision): Strea
 
         // Channel WRITE
         if (envelope.pusher) {
-            sink$ = pusher(envelope.pusher, sink$, socketsupervisor);
+            pusher(envelope.pusher, sink$, socketsupervisor);
         }
     } catch (e) {
         console.error(e);
