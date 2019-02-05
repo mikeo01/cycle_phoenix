@@ -49,9 +49,10 @@ export interface PhoenixWSSource {
      * Handles event stream
      * @param event Event
      * @param listener Listener<any>
+     * @param chanId string
      * @returns void
      */
-    handle(event: EventSource, listener: Listener<any>): void;
+    handle(event: EventSource, listener: Listener<any>, chanId: string): void;
 }
 
 /**

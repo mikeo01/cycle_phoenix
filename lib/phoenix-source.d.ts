@@ -6,10 +6,6 @@ import { SocketSupervision, Channel, PhoenixWSSource, EventSource } from "./inte
 export declare class MakePhoenixWSSource implements PhoenixWSSource {
     private readonly _socketsupervisor;
     private readonly _envelopes$;
-    /**
-     * Channel identifier
-     */
-    private _chanId;
     constructor(_socketsupervisor: SocketSupervision, _envelopes$: Stream<any | Channel>);
     /**
     * Manages creation of start stream for handling channels
@@ -21,7 +17,8 @@ export declare class MakePhoenixWSSource implements PhoenixWSSource {
      * Handles event stream
      * @param event Event
      * @param listener Listener<any>
+     * @param chanId String
      * @returns void
      */
-    handle(event: EventSource, listener: Listener<any>): void;
+    handle(event: EventSource, listener: Listener<any>, chanId: string): void;
 }

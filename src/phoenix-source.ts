@@ -44,11 +44,6 @@ class Event implements EventSource {
  * Manages socket and channel sources using SocketSupervisor
  */
 export class MakePhoenixWSSource implements PhoenixWSSource {
-    /**
-     * Channel identifier
-     */
-    private _chanId: string = '';
-
     constructor(
         private readonly _socketsupervisor: SocketSupervision,
         private readonly _envelopes$: Stream<any|Channel>
@@ -60,10 +55,8 @@ export class MakePhoenixWSSource implements PhoenixWSSource {
     * @returns Event
     */
     select(chanId: string): EventSource {
-        this._chanId = chanId;
-
         return new Event((event: EventSource, listener: Listener<any>) => this
-            .handle(event, listener)
+            .handle(event, listener, chanId)
         );
     }
 
@@ -71,19 +64,20 @@ export class MakePhoenixWSSource implements PhoenixWSSource {
      * Handles event stream
      * @param event Event
      * @param listener Listener<any>
+     * @param chanId String
      * @returns void
      */
-    handle(event: EventSource, listener: Listener<any>): void {
+    handle(event: EventSource, listener: Listener<any>, chanId: string): void {
         // Subscribe to interested channel
         const channel$ = adapt(this._envelopes$
-            .filter((chan: Channel) => chan && chan.name === this._chanId)
+            .filter((chan: Channel) => chan && chan.name === chanId)
         );
 
         // Listen to events
         channel$.addListener({
             next: () => {
                 // Retrieve interested channel
-                const channel = this._socketsupervisor.getChannel(this._chanId);
+                const channel = this._socketsupervisor.getChannel(chanId);
 
                 // Add listener
                 channel.on(event.eventName, (message: any) => listener.next(message));
