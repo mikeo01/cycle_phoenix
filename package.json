@@ -1,6 +1,6 @@
 {
   "name": "cycle-phoenix",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Cycle.js driver around the Phoenix WS library; connect to Elixir Phoenix channels from Cycle.js",
   "main": "./lib/index.js",
   "scripts": {
